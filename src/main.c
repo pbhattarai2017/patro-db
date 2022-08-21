@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <wchar.h>
+#include <errno.h>
 
 int die(char *msg) {
   perror(msg);
@@ -38,8 +39,9 @@ int main(int argc, char *argv[]) {
                      3306, NULL, 0) == connection ||
       die("failed to connect to the database");
   // printf("argc = %d", argc);
+  errno = 22;
   if (argc == 2 || argc > 3) {
-    die("Invalid argument\nSyntax: miti <year> <month>");
+    die("Syntax: miti <year> <month>");
   } else if (argc == 3) {
     mitiYear = atoi(argv[1]);
     mitiMonth = atoi(argv[2]);
@@ -55,6 +57,7 @@ int main(int argc, char *argv[]) {
      * @brief use current date
      *
      */
+    errno = 0;
     time_t T = time(NULL);
     struct tm currentDate = *localtime(&T);
     snprintf(dateBuffer, dateBufferSize, "%d-%d-%d", currentDate.tm_year + 1900,
@@ -118,9 +121,11 @@ int main(int argc, char *argv[]) {
       make_calendar(mitiYear, mitiMonth, mitiDay, totalDays,
                     start_date.tm_wday + 1);
     } else {
+      errno = 33;
       die("total number of days in a month is invalid");
     }
   } else {
+    errno = 121;
     die("miti couldn't be fetched from database");
   }
   mysql_free_result(result);
