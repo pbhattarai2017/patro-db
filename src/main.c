@@ -163,18 +163,17 @@ void make_calendar(int mitiYear, int mitiMonth, int mitiDay, int totalDays,
       if (i == 6) {
         // red color in saturday
         printf("\033[1;31m");
-      } else if (currentDay == mitiDay) {
+      }
+	  if (currentDay == mitiDay) {
         // yellow color today
-        printf("\033[0;1;33m");
+        printf("\033[1;43m");
       }
       if (currentDay < 10) {
         printf(" ");
       }
-      printf("%d   ", currentDay++);
-      // if(currentDay < 11) {
-      //   printf(" ");
-      // }
+      printf("%d", currentDay++);
       printf("\033[0m");
+	  printf("   ");
     } else {
       printf("     ");
     }
@@ -188,19 +187,21 @@ void make_calendar(int mitiYear, int mitiMonth, int mitiDay, int totalDays,
           printf("\n");
         }
         return;
-      };
+      }
       if (i == 6) {
         // red color in saturday
         printf("\033[1;31m");
-      } else if (currentDay == mitiDay) {
+      }
+	  if (currentDay == mitiDay) {
         // yellow color today
-        printf("\033[0;1;33m");
+        printf("\033[1;43m");
       }
       if (currentDay < 10) {
         printf(" ");
       }
-      printf("%d   ", currentDay++);
+      printf("%d", currentDay++);
       printf("\033[0m");
+	  printf("   ");
     }
     printf("\n");
   }
