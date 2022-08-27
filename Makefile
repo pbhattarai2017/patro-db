@@ -3,7 +3,7 @@ BUILD := ./build
 OBJ := ./obj
 MAIN := main
 
-all: $(BUILD)/$(MAIN)
+all: structure $(BUILD)/$(MAIN)
 
 $(BUILD)/$(MAIN): $(OBJ)/$(MAIN).o
 	$(CC) -o $(BUILD)/$(MAIN) $(OBJ)/$(MAIN).o `pkg-config --libs mysqlclient`
@@ -17,4 +17,7 @@ run: $(BUILD)/$(MAIN)
 clean: 
 	rm $(OBJ)/$(MAIN).o
 	rm $(BUILD)/$(MAIN)
-	
+
+structure:
+	mkdir -p build
+	mkdir -p obj
